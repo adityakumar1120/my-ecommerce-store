@@ -12,6 +12,7 @@ import { useLocalStorage } from './hooks/useLocalStorage'
 import AboutPage from './pages/AboutPage'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
+import Category from './pages/category/Category'
 
 export default function App() {
   const [data , setData] = useState(()=>{
@@ -77,7 +78,7 @@ export default function App() {
           id : 4
       },
   ])
-
+const [categoriesData , setCategoriesData] = useState([])
  
   useLocalStorage('data' , data)
   useLocalStorage('categories' , categories)
@@ -92,7 +93,8 @@ export default function App() {
       data={data} setData={setData} sortBy={sortBy} setSortBy={setSortBy} sortByPrice={sortByPrice} setSortByPrice={setSortByPrice}/>} />
 
       <Route path='/about' element={<AboutPage/>} />
-
+      <Route path='/category/:categoryId' element={<Category categoriesData={categoriesData} setCategoriesData={setCategoriesData} categories={categories} setCategories={setCategories} setpopUpCart={setpopUpCart} wishlist={wishlist} setWishlist={setWishlist} cartData={cartData} setCartData={setCartData}
+      data={data} setData={setData} sortBy={sortBy} setSortBy={setSortBy} sortByPrice={sortByPrice} setSortByPrice={setSortByPrice}/>} />
       <Route path='/signUp' element={<SignUp/>} />
       <Route path='/login' element={<Login/>} />
       
@@ -103,7 +105,7 @@ export default function App() {
       <Route path='/search' element={<Search setpopUpCart={setpopUpCart} setCartData={setCartData} wishlist={wishlist} setWishlist={setWishlist} searchData={searchData} setSearchData={setSearchData}
       sortBy={sortBy} setSortBy={setSortBy} sortByPrice={sortByPrice} setSortByPrice={setSortByPrice}
       />} />
-      <Route path='/:products' element={<Products cartData={cartData} setCartData={setCartData} wishlist={wishlist} setWishlist={setWishlist} data={data} setData={setData}/>} />
+      <Route path='/products/:productId' element={<Products cartData={cartData} setCartData={setCartData} wishlist={wishlist} setWishlist={setWishlist} data={data} setData={setData}/>} />
 
       <Route path='/wishlist' element={<WishList wishlist={wishlist} setWishlist={setWishlist} data={data} setData={setData}/>} />
       

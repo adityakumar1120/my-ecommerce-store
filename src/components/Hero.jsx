@@ -32,7 +32,7 @@ export default function Hero({isLoading , error , setQuery , setCurrentPage , ca
           <p >iPhone 14 Series</p>
           </div>
         <h1 className='text-3xl md:text-4xl lg:text-5xl leading-9 md:leading-14 font-[500] max-w-[200px] md:max-w-[280px]'>Up to 10% off Voucher</h1>
-        <Link className='flex group'> <span className='border-b w-fit pb-[1px]'>shop Now</span> <img className='ml-2 group-hover:ml-4 transition-all duration-300 ease-out' src={rightArrow} alt="" /></Link>
+        <Link to={`products/123`} className='flex group'> <span className='border-b w-fit pb-[1px]'>shop Now</span> <img className='ml-2 group-hover:ml-4 transition-all duration-300 ease-out' src={rightArrow} alt="" /></Link>
         </div>
         <div className='flex shrink-0 mx-auto justify-center md:p-0 pt-10 min-h-[200px] max-h-[400px] max-w-[400px] lg:max-w-[450px]'>
             <img className='object-cover w-full' src={bg} alt="" />

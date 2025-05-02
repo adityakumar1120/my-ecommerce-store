@@ -86,7 +86,7 @@ export default function Nav({searchData , setSearchData , wishlist , cartData , 
   searchProducts(searchQuery)
   setShowResults(false)
 }else{
-  navigate(`/${searchData[selectedIndex].id}`)
+  navigate(`/products/${searchData[selectedIndex].id}`)
   searchProducts(searchQuery)
   setShowResults(false)
   }
@@ -139,7 +139,7 @@ export default function Nav({searchData , setSearchData , wishlist , cartData , 
                     setShowResults(false)
                     setClickedElem(result)
                   }}
-                  to={`/${result.id}`} state={result}>
+                  to={`/products/${result.id}`} state={result}>
                   <div key={i} className={`${result.isSelected ? 'bg-[#ddd]' : ''} px-[20px] py-[10px] flex items-center gap-2.5 hover:bg-[#ddd] cursor-pointer`}><IoSearchOutline className='text-lg font-bold'/> { result.title}</div>
                   </Link>
                 })

@@ -7,7 +7,8 @@ import addIcon from '../assets/productsAssets/icon-plus.svg'
 import freeDelivery from '../assets/productsAssets/free-delivery.svg'
 export default function Products({data , setData , wishlist , setWishlist , cartData , setCartData}) {
   const {state} = useLocation()
-  const id = parseInt(useParams().products)
+  const id = parseInt(useParams().productId)
+  console.log(id);
   const [product , setProduct] = useState()
     const [isTrue , setIsTrue] = useState(false)
   console.log(Math.floor(product?.rating));

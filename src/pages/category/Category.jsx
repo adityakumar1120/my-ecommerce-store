@@ -5,9 +5,11 @@ import { getProducts } from '../../services/GetServices'
 import Spinner from '../../components/Spinner'
 import Pagination from '../../components/Pagination'
 import Hero from '../../components/Hero'
-export default function Home({sortByPrice , setSortByPrice,
+import { useParams } from 'react-router-dom'
+export default function Category({sortByPrice , setSortByPrice,
   sortBy , setSortBy,data , setData ,wishlist , setWishlist ,
-  cartData , setCartData , setpopUpCart , categories , setCategories
+  cartData , setCartData , setpopUpCart , categories , setCategories,
+  categoriesData , setCategoriesData
 }) {
   const [currentPage , setCurrentPage] = useState(0)
   const [error , setError] = useState({
@@ -23,29 +25,18 @@ export default function Home({sortByPrice , setSortByPrice,
 // console.log(data);
 const [selectedFilter] = sortByPrice.filter((sort)=> sort.isSelected) //getting the element on which the user clicks to filter
 const [selectedFilterForOrder] = sortBy.filter((sort)=> sort.isSelected) //getting the element on which the user clicks to filter
-console.log(data);
+const params = useParams().categoryId
+console.log(params);
 
 const PAGE_SIZE = 20
-const noOfPages = Math.ceil(data.length/PAGE_SIZE)
+const noOfPages = Math.ceil(categoriesData.length/PAGE_SIZE)
 const start = currentPage * PAGE_SIZE;
 const end = start + PAGE_SIZE;
-async function getData(path){
-  try{
-    const response = await getProducts(path)  
-      setData(response.data.products)
-   
-    setIsLoading(false)
-  } catch(err){
-      setError(prev => ({...prev , products : 'failed to get the products'}))
-    
-  }finally{
-      setIsLoading(prev => ({...prev , products : false}))
-  }
-  }
+
 async function getCategories(path){
   try{
     const response = await getProducts(path)  
-   setCategories([...response.data])
+   setCategories([ ...response.data])
     setIsLoading(false)
   } catch(err){
       setError(prev => ({...prev , categories : 'failed to get the categories'}))
@@ -56,38 +47,54 @@ async function getCategories(path){
 
 
   useEffect(()=>{
-  if(data.length <= 0){
-    getData('/?limit=194')
-  }
+  
   if(categories.length <= 0){
     getCategories('/categories')
   }
 } , [])
 
-
-
+const getCategoryData = async (path)=>{
+  try{
+    const response = await getProducts(path)
+    console.log(response.data.products);
+    setCategoriesData([...response.data.products])
+  }catch(err){
+    console.log(err);
+  }
+}
+useEffect(()=>{
+    console.log(params);
+    getCategoryData(`/category/${params}`)
+} , [])
+useEffect(()=>{
+  if(query){
+    if(query === '/?limit=194'){
+      getData(query)
+    } else {
+      if(query){
+        getCategoryData(`/category/${query}`)
+      }
+    }
+  }
+}, [query])
   return (
     <div className='min-h-[100vh]'>
         <Hero setQuery={setQuery} setCurrentPage={setCurrentPage} error={error} categories={categories} isLoading={isLoading}/>
        
-          <h1 className='text-3xl p-[40px] font-bold text-center'>Trending Products</h1>
+          <h1 className='text-3xl p-[40px] font-bold text-center'>{params.split('-').map((el , i)=>{
+            return el.split('').map((el, i) => i === 0 ? el.toUpperCase() : el).join('')
+          }).join(' ')}</h1>
           <FilterData sortBy={sortBy} setSortBy={setSortBy} sortByPrice={sortByPrice} setSortByPrice={setSortByPrice}/>
 
           <div className="products-section grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-8 w-full  p-[15px] md:p-[30px]">
+          
           {
-            isLoading.products ? <Spinner/> : error.products ? error.products
-            :  data.slice(start, end).filter((item) => {
-              if(selectedFilter && selectedFilter.val) return item.price >= selectedFilter?.val[0] && item.price <= selectedFilter?.val[1]
-              return item
-            } ).sort((a,b)=>{
-              if(!selectedFilterForOrder) return 0
-              return selectedFilterForOrder?.val === 'ascending' ? a.price - b.price : b.price - a.price
-            }).map((product,i)=>{
-
-              return <Products setpopUpCart={setpopUpCart} cartData={cartData} setCartData={setCartData} page={'home'} wishlist={wishlist} setWishlist={setWishlist} item={product} key={product.id}
-              id={product.id}
-              name={product.title} image={product.images} price={product.price} category={product.category}/>
-            })
+            categoriesData.length ?  categoriesData.map((product,i)=>{
+                console.log(categoriesData.length);
+                return <Products setpopUpCart={setpopUpCart} cartData={cartData} setCartData={setCartData} page={'home'} wishlist={wishlist} setWishlist={setWishlist} item={product} key={product.id}
+                id={product.id}
+                name={product.title} image={product.images} price={product.price} category={product.category}/>
+              }) : 'No products Found'
           }
         </div>
         <Pagination

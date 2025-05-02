@@ -59,7 +59,7 @@ export default function Products({setpopUpCart, item , wishlist , setWishlist , 
     }, 1000)
   }
   return (
-    <Link  to={`/${item.id}`} state={item} className='flex flex-col justify-between items-center  rounded '>
+    <Link  to={`/products/${item.id}`} state={item} className='flex flex-col justify-between items-center  rounded '>
         <div className='rounded overflow-hidden relative'>
         <div className='bg-[#F5F5F5] '>
           <img src={item.images[0]} alt="" className='w-full  object-contain'/>

@@ -1,12 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CategoryCard({setQuery , setCurrentPage , item}) {
+
   return (
-    <div
+    <Link to={`/category/${item.slug}`}
             onClick={e => {
+              console.log(item.slug);
               setCurrentPage(0)
               setQuery(item.slug)}}
-            className={`  capitalize py-2 text-base cursor-pointer hover:text-[#DB4444] transition-all duration-100`}>{item.name}</div>
+            className={`  capitalize py-2 text-base cursor-pointer hover:text-[#DB4444] transition-all duration-100`}>{item.name}</Link>
   )
 }
 
