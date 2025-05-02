@@ -4,7 +4,7 @@ import { FaRegUser, FaShopify, FaUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import {  Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getProducts } from '../services/getServices';
+import { getProducts } from '../services/GetServices';
 import heart from '../assets/productsAssets/icon.svg'
 import cartImg from '../assets/productsAssets/Cart1.svg'
 import searchImg from '../assets/productsAssets/search.svg'

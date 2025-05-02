@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { getProducts } from '../services/getServices'
+import { getProducts } from '../services/GetServices'
 import heart from '../assets/productsAssets/icon.svg'
 import removeIcon from '../assets/productsAssets/icon-minus.svg'
 import addIcon from '../assets/productsAssets/icon-plus.svg'
