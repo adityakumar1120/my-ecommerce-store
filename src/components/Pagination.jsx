@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { GrFormPrevious, GrPrevious } from 'react-icons/gr'
 import { IoChevronForwardSharp } from 'react-icons/io5'
-import { getProducts } from '../services/getServices'
+import { getProducts } from '../services/GetServices'
 
 export default function Pagination({setCurrentPage,currentPage , noOfPages}) {
     const handlePageChange = (n)=>{
