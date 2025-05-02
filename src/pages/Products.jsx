@@ -5,7 +5,6 @@ import heart from '../assets/productsAssets/icon.svg'
 import removeIcon from '../assets/productsAssets/icon-minus.svg'
 import addIcon from '../assets/productsAssets/icon-plus.svg'
 import freeDelivery from '../assets/productsAssets/free-delivery.svg'
-import returnImg from '../assets/productsAssets/icon-return.svg'
 export default function Products({data , setData , wishlist , setWishlist , cartData , setCartData}) {
   const {state} = useLocation()
   const id = parseInt(useParams().products)
@@ -170,7 +169,7 @@ export default function Products({data , setData , wishlist , setWishlist , cart
           </div>
         </div>
         <div className='flex pt-4 md:pt-6 pb-2.5 md:pb-4 px-4 md:px-8 gap-4 md:gap-7 '>
-          <img src={returnImg} alt="" />
+          <img src={freeDelivery} alt="" />
           <div>
             <p className='text-base font-bold'>Return Delivery</p>
             <p className='text-sm underline mt-2'>Free 30 Days Delivery Returns. Details</p>
